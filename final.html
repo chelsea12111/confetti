@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finalized Offer Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,93 +22,45 @@
             text-align: center;
         }
 
-        .button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
-
-        .button:hover {
-            background-color: #45a049;
-        }
-
         #contentContainer {
-            margin-bottom: 20px;
             text-align: left;
+            margin-bottom: 20px;
         }
 
         #signatureContainer {
-            margin: 20px 0;
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="final-container">
         <h1>Finalized Offer Document</h1>
-        <p>This document consolidates the content of the offer and your signature.</p>
+        <p>The content and your signature are displayed below:</p>
 
-        <!-- Container to load conditional.html content -->
         <div id="contentContainer"></div>
 
-        <!-- Container for the signature -->
         <div id="signatureContainer">
-            <p><i>No signature added yet. Please sign the document in the previous step.</i></p>
+            <h3>Signature:</h3>
+            <img id="signatureImage" src="" alt="Signature" style="max-width: 100%; border: 1px solid #ccc; padding: 10px;">
         </div>
-
-        <!-- Button to generate the PDF -->
-        <button class="button" onclick="generatePDF()">Generate PDF</button>
     </div>
 
     <script>
-        let signatureData = '';
-
-        // Load content from conditional.html
         async function loadConditionalContent() {
             const response = await fetch('conditional.html');
             const html = await response.text();
             document.getElementById('contentContainer').innerHTML = html;
 
-            // If signature exists, display it
-            const storedSignature = localStorage.getItem('signature');
-            if (storedSignature) {
-                signatureData = storedSignature;
-                document.getElementById('signatureContainer').innerHTML = `
-                    <h3>Signature:</h3>
-                    <img src="${signatureData}" alt="Signature" style="max-width: 100%; border: 1px solid #ccc; padding: 10px;">
-                `;
+            // Load the saved signature
+            const signatureData = localStorage.getItem('signature');
+            if (signatureData) {
+                document.getElementById('signatureImage').src = signatureData;
+            } else {
+                document.getElementById('signatureContainer').innerHTML = '<p><i>No signature available.</i></p>';
             }
         }
 
-        // Generate PDF
-        function generatePDF() {
-            if (!signatureData) {
-                alert('No signature available. Please sign the document first.');
-                return;
-            }
-
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF();
-
-            // Add conditional.html content
-            const contentHTML = document.getElementById('contentContainer').innerHTML;
-            pdf.html(contentHTML, {
-                callback: function (pdf) {
-                    // Add the signature
-                    pdf.addImage(signatureData, 'PNG', 15, 150, 100, 50);
-                    pdf.save('Final_Offer_Document.pdf');
-                },
-                x: 15,
-                y: 10,
-            });
-        }
-
-        // Load content on page load
         loadConditionalContent();
     </script>
 </body>
