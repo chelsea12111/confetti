@@ -127,18 +127,10 @@
         }
 
         function submitSignature() {
-            const successMessage = document.getElementById('successMessage');
-            successMessage.style.display = 'block';
-
-            // Trigger confetti if available
-            if (typeof triggerConfetti === 'function') {
-                triggerConfetti();
-            }
-
-            // Redirect after 3 seconds
-            setTimeout(() => {
-                window.location.href = 'final.html';
-            }, 3000);
+            const signatureData = canvas.toDataURL('image/png'); // Capture signature as Base64
+            localStorage.setItem('signature', signatureData); // Save signature to localStorage
+            alert('Signature saved! Please proceed to the final document.');
+            window.location.href = 'final.html'; // Redirect to final.html
         }
     </script>
     <script src="confetti.js"></script>
