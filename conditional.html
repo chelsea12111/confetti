@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional Offer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .offer-letter {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .conditions {
+            margin-top: 30px;
+        }
+
+        .condition {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .images-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .images-container img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .condition-icon {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+        }
+
+        .condition-text {
+            flex: 1;
+        }
+
+        .signature {
+            margin-top: 40px;
+            text-align: right;
+        }
+
+        .date {
+            margin-top: 20px;
+            text-align: right;
+            color: #666;
+        }
+
+        .termination-clause {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #fff3f3;
+            border-left: 4px solid #ff4444;
+            border-radius: 4px;
+        }
+
+        .sign-button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .sign-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sign-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="offer-letter">
+        <h1>Conditional Offer Letter</h1>
+
+        <p>Dear Candidate,</p>
+        <p>We are pleased to offer you the position of "Partner" in Sanju's life, subject to the following conditions:</p>
+
+        <div class="conditions">
+            <div class="condition">
+                <div class="condition-text">
+                    <div class="images-container">
+                        <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQRRy4aMlTyoFEkicqaF9-uSzubnssVSqcXb09g7wTAg1aRGxta2bcNEOdWG8WtbMcQlPf-y4Mp08UTRFvZjA3IxY3p_ry93jx9iuS2nEJaXy0IZEFbbQIH&usqp=CAE" alt="Current Gift">
+                        <img src="https://assets.hermes.com/is/image/hermesedito/P_11_KELLY_PRODUIT_1" alt="Hermes Kelly Bag">
+                        <img src="https://www.laingsuk.com/media/wysiwyg/cache/976x1366/S/a/Santos-banner-landing-page_1.jpg" alt="Cartier Watch">
+                    </div>
+                    <h3>Condition 1:</h3>
+                    <p>Purchase of the above 3 items</p>
+                </div>
+            </div>
+
+            <div class="condition">
+                <img class="condition-icon" src="https://cdn-icons-png.flaticon.com/512/1721/1721929.png" alt="Listen Icon">
+                <div class="condition-text">
+                    <h3>Condition 2:</h3>
+                    <p>Listen to me and accept that I'm always right</p>
+                </div>
+            </div>
+
+            <div class="condition">
+                <img class="condition-icon" src="https://cdn-icons-png.flaticon.com/512/1029/1029183.png" alt="Heart Icon">
+                <div class="condition-text">
+                    <h3>Condition 3:</h3>
+                    <p>When I say something, take my word for it and don't argue. If you dont agree that is fine, but don't go off at me or assume the worst about what I say or how I will react or accuse me of things etc etc. Learn that im just trying to be helpful and give you input I think might be helpful</p>
+                </div>
+            </div>
+
+            <div class="condition">
+                <img class="condition-icon" src="https://cdn-icons-png.flaticon.com/512/1029/1029132.png" alt="Promise Icon">
+                <div class="condition-text">
+                    <h3>Condition 4:</h3>
+                    <p>When you see I'm hurt, care about me and not ego. You must be empathetic and not just say sorry, but actually mean it and show it by actions</p>
+                </div>
+            </div>
+
+            <div class="condition">
+                <img class="condition-icon" src="https://cdn-icons-png.flaticon.com/512/1029/1029132.png" alt="Promise Icon">
+                <div class="condition-text">
+                    <h3>Condition 5:</h3>
+                    <p>You must vow to never ever hurt me knowingly again and if its not intentional, you must apologize immediately with NO EXCUSES OR DEFENSIVENESS and make it up to me</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="termination-clause">
+            <p><strong>Note:</strong> Failure to adhere to these conditions results in immediate termination of the post with no explanation required.</p>
+        </div>
+
+        <div class="sign-button-container">
+            <button onclick="window.location.href='signature.html'" class="sign-button">Sign Offer Letter</button>
+        </div>
+
+        <div class="signature">
+            <p>With love,<br>Sanju</p>
+        </div>
+
+        <div class="date">
+            <p>Date: <script>document.write(new Date().toLocaleDateString())</script></p>
+        </div>
+    </div>
+</body>
+</html>

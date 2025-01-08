@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .final-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            color: #e74c3c;
+            font-size: 24px;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .message {
+            font-size: 1.2em;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .signature {
+            margin-top: 40px;
+            font-style: italic;
+            color: #666;
+        }
+
+        .heart-container {
+            margin: 30px 0;
+            font-size: 3em;
+            color: #e74c3c;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .date {
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="final-container">
+        <!-- Floating hearts background -->
+        <script>
+            for(let i = 0; i < 20; i++) {
+                document.write(`<div class="heart" style="
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() * 3}s
+                ">♥</div>`);
+            }
+        </script>
+
+        <h1>It's Official! 🎉</h1>
+
+        <div class="heart-container">♥</div>
+
+        <div class="message">
+            <p>Thank you for accepting this special position in my life.</p>
+            <p>Looking forward to creating beautiful memories together!</p>
+        </div>
+
+        <div class="signature">
+            <p>With love,<br>Sanju</p>
+        </div>
+
+        <div class="date">
+            <p>Relationship Start Date: <script>document.write(new Date().toLocaleDateString())</script></p>
+        </div>
+    </div>
+
+    <div id="confetti"></div>
+    <script src="confetti.js"></script>
+    <script>
+        // Trigger confetti on load
+        window.addEventListener('load', function() {
+            if(typeof triggerConfetti === 'function') {
+                setInterval(triggerConfetti, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
