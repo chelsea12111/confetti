@@ -3,122 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Congratulations!</title>
+    <title>Finalized Offer Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
         }
 
         .final-container {
             background: white;
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 10px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             text-align: center;
-            max-width: 600px;
-            width: 90%;
-            position: relative;
-            overflow: hidden;
         }
 
-        .heart {
-            position: absolute;
-            color: #e74c3c;
-            font-size: 24px;
-            animation: float 3s ease-in-out infinite;
-            opacity: 0.2;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        h1 {
-            color: #e74c3c;
-            margin-bottom: 20px;
-            font-size: 2em;
-        }
-
-        .message {
-            font-size: 1.2em;
-            color: #2c3e50;
-            line-height: 1.6;
-            margin: 20px 0;
-        }
-
-        .signature {
-            margin-top: 40px;
-            font-style: italic;
-            color: #666;
-        }
-
-        .heart-container {
-            margin: 30px 0;
-            font-size: 3em;
-            color: #e74c3c;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .date {
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
             margin-top: 20px;
-            color: #666;
-            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        #contentContainer {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        #signatureContainer {
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
     <div class="final-container">
-        <!-- Floating hearts background -->
-        <script>
-            for(let i = 0; i < 20; i++) {
-                document.write(`<div class="heart" style="
-                    left: ${Math.random() * 100}%;
-                    top: ${Math.random() * 100}%;
-                    animation-delay: ${Math.random() * 3}s
-                ">♥</div>`);
-            }
-        </script>
+        <h1>Finalized Offer Document</h1>
+        <p>This document consolidates the content of the offer and your signature.</p>
 
-        <h1>It's Official! 🎉</h1>
+        <!-- Container to load conditional.html content -->
+        <div id="contentContainer"></div>
 
-        <div class="heart-container">♥</div>
-
-        <div class="message">
-            <p>Thank you for accepting this special position in my life.</p>
-            <p>Looking forward to creating beautiful memories together!</p>
+        <!-- Container for the signature -->
+        <div id="signatureContainer">
+            <p><i>No signature added yet. Please sign the document in the previous step.</i></p>
         </div>
 
-        <div class="signature">
-            <p>With love,<br>Sanju</p>
-        </div>
-
-        <div class="date">
-            <p>Relationship Start Date: <script>document.write(new Date().toLocaleDateString())</script></p>
-        </div>
+        <!-- Button to generate the PDF -->
+        <button class="button" onclick="generatePDF()">Generate PDF</button>
     </div>
 
-    <div id="confetti"></div>
-    <script src="confetti.js"></script>
     <script>
-        // Trigger confetti on load
-        window.addEventListener('load', function() {
-            if(typeof triggerConfetti === 'function') {
-                setInterval(triggerConfetti, 1000);
+        let signatureData = '';
+
+        // Load content from conditional.html
+        async function loadConditionalContent() {
+            const response = await fetch('conditional.html');
+            const html = await response.text();
+            document.getElementById('contentContainer').innerHTML = html;
+
+            // If signature exists, display it
+            const storedSignature = localStorage.getItem('signature');
+            if (storedSignature) {
+                signatureData = storedSignature;
+                document.getElementById('signatureContainer').innerHTML = `
+                    <h3>Signature:</h3>
+                    <img src="${signatureData}" alt="Signature" style="max-width: 100%; border: 1px solid #ccc; padding: 10px;">
+                `;
             }
-        });
+        }
+
+        // Generate PDF
+        function generatePDF() {
+            if (!signatureData) {
+                alert('No signature available. Please sign the document first.');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            // Add conditional.html content
+            const contentHTML = document.getElementById('contentContainer').innerHTML;
+            pdf.html(contentHTML, {
+                callback: function (pdf) {
+                    // Add the signature
+                    pdf.addImage(signatureData, 'PNG', 15, 150, 100, 50);
+                    pdf.save('Final_Offer_Document.pdf');
+                },
+                x: 15,
+                y: 10,
+            });
+        }
+
+        // Load content on page load
+        loadConditionalContent();
     </script>
 </body>
 </html>
